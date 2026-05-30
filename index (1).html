@@ -1,0 +1,170 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: 'he'
+
+collections:
+  - name: "pages"
+    label: "דפים"
+    files:
+      - name: "poem"
+        label: "שיר פתיחה"
+        file: "content/poem.json"
+        fields:
+          - { label: "כותרת השיר", name: "title", widget: "string" }
+          - { label: "שורות השיר", name: "lines", widget: "list", field: { label: "שורה", name: "line", widget: "string" } }
+
+      - name: "intro"
+        label: "מבוא"
+        file: "content/intro.json"
+        fields:
+          - label: "פסקאות"
+            name: "paragraphs"
+            widget: "list"
+            field: { label: "פסקה", name: "text", widget: "text" }
+
+      - name: "chapter1"
+        label: "פרק 1 — תקופת הקינון"
+        file: "content/chapter1.json"
+        fields:
+          - label: "פריטי ציוד"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "כותרת", name: "title", widget: "string" }
+              - label: "תוכן"
+                name: "blocks"
+                widget: "list"
+                fields:
+                  - label: "סוג"
+                    name: "type"
+                    widget: "select"
+                    options:
+                      - { label: "פסקה", value: "p" }
+                      - { label: "טיפ טבעי", value: "tip" }
+                      - { label: "הערה אישית", value: "note" }
+                      - { label: "רשימה", value: "list" }
+                  - { label: "טקסט", name: "text", widget: "text", required: false }
+                  - label: "פריטי רשימה"
+                    name: "items"
+                    widget: "list"
+                    required: false
+                    field: { label: "פריט", name: "item", widget: "text" }
+
+      - name: "chapter2"
+        label: "פרק 2 — לקראת הלידה"
+        file: "content/chapter2.json"
+        fields:
+          - label: "פסקאות"
+            name: "intro"
+            widget: "text"
+          - label: "נקודות"
+            name: "bullets"
+            widget: "list"
+            fields:
+              - label: "תוכן"
+                name: "blocks"
+                widget: "list"
+                fields:
+                  - label: "סוג"
+                    name: "type"
+                    widget: "select"
+                    options:
+                      - { label: "פסקה", value: "p" }
+                      - { label: "טיפ טבעי", value: "tip" }
+                      - { label: "הערה אישית", value: "note" }
+                      - { label: "רשימת ציוד", value: "checklist" }
+                  - { label: "טקסט", name: "text", widget: "text", required: false }
+                  - label: "פריטי רשימה"
+                    name: "items"
+                    widget: "list"
+                    required: false
+                    field: { label: "פריט", name: "item", widget: "text" }
+
+      - name: "chapter3"
+        label: "פרק 3 — אחרי הלידה"
+        file: "content/chapter3.json"
+        fields:
+          - label: "נקודות"
+            name: "bullets"
+            widget: "list"
+            fields:
+              - label: "תוכן"
+                name: "blocks"
+                widget: "list"
+                fields:
+                  - label: "סוג"
+                    name: "type"
+                    widget: "select"
+                    options:
+                      - { label: "פסקה", value: "p" }
+                      - { label: "טיפ טבעי", value: "tip" }
+                      - { label: "הערה אישית", value: "note" }
+                  - { label: "טקסט", name: "text", widget: "text", required: false }
+
+      - name: "chapter4"
+        label: "פרק 4 — הנקה"
+        file: "content/chapter4.json"
+        fields:
+          - { label: "פתיח", name: "intro", widget: "text" }
+          - label: "נקודות"
+            name: "bullets"
+            widget: "list"
+            fields:
+              - label: "תוכן"
+                name: "blocks"
+                widget: "list"
+                fields:
+                  - label: "סוג"
+                    name: "type"
+                    widget: "select"
+                    options:
+                      - { label: "פסקה", value: "p" }
+                      - { label: "הערה אישית", value: "note" }
+                  - { label: "טקסט", name: "text", widget: "text", required: false }
+
+      - name: "chapter5"
+        label: "פרק 5 — מאמא פרו מקס"
+        file: "content/chapter5.json"
+        fields:
+          - label: "נקודות"
+            name: "bullets"
+            widget: "list"
+            fields:
+              - label: "תוכן"
+                name: "blocks"
+                widget: "list"
+                fields:
+                  - label: "סוג"
+                    name: "type"
+                    widget: "select"
+                    options:
+                      - { label: "פסקה", value: "p" }
+                      - { label: "הערה אישית", value: "note" }
+                  - { label: "טקסט", name: "text", widget: "text", required: false }
+          - label: "פסקאות סיום"
+            name: "closing"
+            widget: "list"
+            field: { label: "פסקה", name: "text", widget: "text" }
+
+      - name: "chapter6"
+        label: "פרק 6 — לאמא החוקרת"
+        file: "content/chapter6.json"
+        fields:
+          - { label: "פתיח", name: "intro", widget: "string" }
+          - label: "קטגוריות"
+            name: "groups"
+            widget: "list"
+            fields:
+              - { label: "שם הקטגוריה", name: "title", widget: "string" }
+              - label: "קישורים"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "שם", name: "name", widget: "string" }
+                  - { label: "קישור", name: "url", widget: "string" }
+                  - { label: "תיאור", name: "desc", widget: "string", required: false }
