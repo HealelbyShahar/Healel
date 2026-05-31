@@ -103,6 +103,7 @@
     transition: transform 0.3s ease;
     padding: 2rem 1.5rem;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
   .toc-overlay.open .toc-drawer { transform: translateX(0); }
 
@@ -1138,8 +1139,7 @@
   var tocClose = document.getElementById('tocClose');
   var tocDrawer = document.getElementById('tocDrawer');
 
-  function openToc(e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
+  function openToc() {
     tocOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1148,22 +1148,25 @@
     document.body.style.overflow = '';
   }
 
-  tocBtn.addEventListener('click', function(e){ e.preventDefault(); openToc(); });
-  tocBtn.addEventListener('touchstart', function(e){ e.preventDefault(); openToc(); }, {passive: false});
-  tocClose.addEventListener('click', closeToc);
-  tocClose.addEventListener('touchstart', function(e){ e.preventDefault(); closeToc(); }, {passive: false});
+  tocBtn.addEventListener('click', function(e){ 
+    e.preventDefault(); 
+    e.stopPropagation(); 
+    openToc(); 
+  });
+
+  tocClose.addEventListener('click', function(e){ 
+    e.stopPropagation(); 
+    closeToc(); 
+  });
 
   tocOverlay.addEventListener('click', function(e){
-    if (!tocDrawer.contains(e.target)) closeToc();
+    if (e.target === tocOverlay) closeToc();
   });
 
   document.querySelectorAll('.toc-link').forEach(function(link){
-    link.addEventListener('click', function(){ 
-      closeToc(); 
-    });
-    link.addEventListener('touchstart', function(e){
+    link.addEventListener('click', function(e){ 
       closeToc();
-    }, {passive: true});
+    });
   });
 </script>
 
@@ -1177,7 +1180,8 @@
   <div style="background:#fff;max-width:800px;margin:32px auto 60px;border-radius:16px;overflow:hidden;font-family:'IBM Plex Sans Hebrew',sans-serif;direction:rtl;">
 
     <!-- Login -->
-    <div id="editor-login" style="padding:48px 40px;text-align:center;">
+    <div id="editor-login" style="padding:40px 40px;text-align:center;position:relative;">
+      <button onclick="closeEditor()" style="position:absolute;top:14px;left:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#9b8b72;line-height:1;padding:4px 8px;">✕</button>
       <div style="font-size:32px;margin-bottom:12px;">✏️</div>
       <h2 style="color:#e38c4d;margin-bottom:6px;font-size:20px;">עורך תוכן HEALEL</h2>
       <p style="color:#9b8b72;font-size:13px;margin-bottom:28px;">כניסה למנהלת בלבד</p>
