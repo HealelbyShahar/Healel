@@ -1364,7 +1364,7 @@
     var ed = $('ed-content');
     ed.focus();
     var html = '';
-    if (type === 'p') html = '<p>טקסט חדש — לחצי לעריכה</p>';
+    if (type === 'p') html = '<p>טקסט חדש</p>';
     if (type === 'tip') html = '<div class="tip-box"><span class="tip-label">טיפ טבעי</span>כתבי כאן את הטיפ</div>';
     if (type === 'note') html = '<div class="personal-note">כתבי כאן הערה אישית</div>';
     if (type === 'bullet') html = '<div class="bullet-point"><p>נקודה חדשה</p></div>';
@@ -1395,7 +1395,7 @@
     var cover = section.querySelector('.chapter-cover');
     if (cover) {
       cover.className = 'chapter-cover' + (color === 'gold' ? ' appendix-cover' : '');
-      $('save-msg').textContent = 'הצבע שונה — לחצי שמירה';
+      $('save-msg').textContent = 'הצבע שונה';
     }
   };
 
@@ -1409,7 +1409,7 @@
     var btn = $('save-btn');
     var msg = $('save-msg');
     var tok = localStorage.getItem('_hed_tok');
-    if (!tok) { msg.textContent = 'אין token — התנתקי והתחברי מחדש'; return; }
+    if (!tok) { msg.textContent = 'אין token'; return; }
     var token = atob(tok);
 
     // Apply preview first
