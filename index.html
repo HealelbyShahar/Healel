@@ -575,7 +575,7 @@
   }
 </style>
 </head>
-<body style="overflow: hidden;">
+<body>
 
 <!-- NAVBAR -->
 <nav class="navbar">
@@ -1137,6 +1137,7 @@
 </footer>
 
 <script>
+  document.body.style.overflow = ''; // reset on load
   var tocOverlay = document.getElementById('tocOverlay');
   var tocBtn = document.getElementById('tocBtn');
   var tocClose = document.getElementById('tocClose');
@@ -1195,7 +1196,7 @@
   <div style="background:#fff;max-width:800px;margin:32px auto 60px;border-radius:16px;overflow:hidden;font-family:'IBM Plex Sans Hebrew',sans-serif;direction:rtl;">
 
     <!-- Login -->
-    <div id="editor-login" style="padding: 40px; text-align: center; position: relative; display: none;">
+    <div id="editor-login" style="padding:40px;text-align:center;position:relative;">
       <button onclick="closeEditor()" style="position:absolute;top:14px;left:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#9b8b72;line-height:1;padding:4px 8px;">✕</button>
       <div style="font-size:32px;margin-bottom:12px;">✏️</div>
       <h2 style="color:#e38c4d;margin-bottom:6px;font-size:20px;">עורך תוכן HEALEL</h2>
@@ -1325,6 +1326,11 @@
   window.openEditor = function() {
     $('editor-overlay').style.display = 'block';
     document.body.style.overflow = 'hidden';
+    // Always show login, hide main
+    $('editor-login').style.display = 'block';
+    $('editor-main').style.display = 'none';
+    $('login-err').style.display = 'none';
+    $('editor-pw').value = '';
     var hasToken = !!localStorage.getItem('_hed_tok');
     $('token-row').style.display = hasToken ? 'none' : 'block';
   };
