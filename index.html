@@ -73,6 +73,8 @@
     white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    -webkit-appearance: none;
+    user-select: none;
   }
   .navbar-toc-btn:hover, .navbar-toc-btn:active {
     background: var(--orange);
@@ -1137,8 +1139,7 @@
   var tocDrawer = document.getElementById('tocDrawer');
 
   function openToc(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) { e.preventDefault(); e.stopPropagation(); }
     tocOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1147,23 +1148,307 @@
     document.body.style.overflow = '';
   }
 
-  tocBtn.addEventListener('click', openToc);
-  tocBtn.addEventListener('touchend', openToc);
+  tocBtn.addEventListener('click', function(e){ e.preventDefault(); openToc(); });
+  tocBtn.addEventListener('touchstart', function(e){ e.preventDefault(); openToc(); }, {passive: false});
   tocClose.addEventListener('click', closeToc);
-  tocClose.addEventListener('touchend', function(e){ e.preventDefault(); closeToc(); });
+  tocClose.addEventListener('touchstart', function(e){ e.preventDefault(); closeToc(); }, {passive: false});
 
   tocOverlay.addEventListener('click', function(e){
     if (!tocDrawer.contains(e.target)) closeToc();
   });
 
   document.querySelectorAll('.toc-link').forEach(function(link){
-    link.addEventListener('click', closeToc);
-    link.addEventListener('touchend', closeToc);
+    link.addEventListener('click', function(){ 
+      closeToc(); 
+    });
+    link.addEventListener('touchstart', function(e){
+      closeToc();
+    }, {passive: true});
   });
 </script>
 
 
 
+
+
+<!-- EDITOR -->
+<div id="editor-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;overflow-y:auto;">
+  <div style="background:#fff;max-width:780px;margin:40px auto;border-radius:16px;overflow:hidden;font-family:'IBM Plex Sans Hebrew',sans-serif;direction:rtl;">
+    
+    <!-- Login screen -->
+    <div id="editor-login" style="padding:48px 40px;text-align:center;">
+      <h2 style="color:#e38c4d;margin-bottom:8px;font-size:22px;">עורך תוכן HEALEL</h2>
+      <p style="color:#9b8b72;font-size:14px;margin-bottom:28px;">כניסה למנהל בלבד</p>
+      <input id="editor-pw" type="password" placeholder="סיסמה" 
+        style="width:100%;max-width:280px;padding:12px 16px;border:1.5px solid #ede5d8;border-radius:10px;font-size:15px;font-family:inherit;direction:rtl;text-align:center;outline:none;">
+      <br><br>
+      <button onclick="editorLogin()" 
+        style="background:#e38c4d;color:white;border:none;padding:12px 32px;border-radius:10px;font-size:15px;font-family:inherit;cursor:pointer;">
+        כניסה
+      </button>
+      <p id="editor-login-err" style="color:red;font-size:13px;margin-top:12px;display:none;">סיסמה שגויה</p>
+    </div>
+
+    <!-- Editor screen -->
+    <div id="editor-main" style="display:none;">
+      <div style="background:#e38c4d;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;">
+        <h2 style="color:#fef3da;font-size:18px;margin:0;">עורך תוכן</h2>
+        <button onclick="closeEditor()" style="background:rgba(255,255,255,0.2);border:none;color:#fef3da;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;">סגור</button>
+      </div>
+      
+      <div style="padding:24px 28px;">
+        <!-- Section selector -->
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px;color:#9b8b72;display:block;margin-bottom:6px;">בחרי קטע לעריכה:</label>
+          <select id="editor-section" onchange="loadSection()" 
+            style="width:100%;padding:10px 14px;border:1.5px solid #ede5d8;border-radius:10px;font-size:14px;font-family:inherit;direction:rtl;background:#fff;">
+            <option value="">— בחרי —</option>
+            <option value="intro-content">מבוא</option>
+            <option value="ch1-edit">פרק 1 — תקופת הקינון</option>
+            <option value="ch2-content">פרק 2 — לקראת הלידה</option>
+            <option value="ch3-edit">פרק 3 — אחרי הלידה</option>
+            <option value="ch4-edit">פרק 4 — הנקה</option>
+            <option value="ch5-edit">פרק 5 — מאמא פרו מקס</option>
+            <option value="ch6-content">פרק 6 — לאמא החוקרת</option>
+          </select>
+        </div>
+
+        <!-- Toolbar -->
+        <div id="editor-toolbar" style="display:none;margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <span style="font-size:12px;color:#9b8b72;margin-left:4px;">הוספה:</span>
+          <button onclick="insertBlock('p')" style="background:#f5ede0;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;color:#6b5a3e;">פסקה</button>
+          <button onclick="insertBlock('tip')" style="background:#f0f7eb;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;color:#2d5218;">טיפ טבעי</button>
+          <button onclick="insertBlock('note')" style="background:#f5ede0;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;color:#6b5a3e;">הערה אישית</button>
+          <button onclick="insertBlock('bullet')" style="background:#fff3e8;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;color:#e38c4d;">נקודה חדשה</button>
+          <div style="margin-right:auto;display:flex;gap:6px;align-items:center;">
+            <span style="font-size:12px;color:#9b8b72;">צבע כותרת פרק:</span>
+            <select id="color-picker" style="padding:4px 8px;border:1.5px solid #ede5d8;border-radius:6px;font-size:12px;font-family:inherit;">
+              <option value="#e38c4d">כתום</option>
+              <option value="#c28a43">זהב</option>
+            </select>
+            <button onclick="applyColor()" style="background:#e38c4d;border:none;color:white;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:inherit;">החל</button>
+          </div>
+        </div>
+
+        <!-- Editor area -->
+        <div id="editor-area" style="display:none;">
+          <div id="editor-content" contenteditable="true"
+            style="min-height:300px;border:1.5px solid #ede5d8;border-radius:10px;padding:16px;font-size:14px;line-height:1.8;direction:rtl;outline:none;background:#faf7f3;">
+          </div>
+          <div style="margin-top:8px;font-size:12px;color:#9b8b72;">טיפ: לחצי על טקסט כדי לערוך. כדי למחוק פסקה — מחקי את כל הטקסט שבה.</div>
+        </div>
+
+        <!-- HTML editor (advanced) -->
+        <div id="editor-html-area" style="display:none;margin-top:12px;">
+          <details>
+            <summary style="font-size:12px;color:#9b8b72;cursor:pointer;margin-bottom:8px;">עריכה מתקדמת (HTML)</summary>
+            <textarea id="editor-html" 
+              style="width:100%;height:200px;border:1.5px solid #ede5d8;border-radius:10px;padding:12px;font-size:12px;font-family:monospace;direction:ltr;resize:vertical;outline:none;"
+              oninput="syncFromHtml()"></textarea>
+          </details>
+        </div>
+
+        <!-- Save button -->
+        <div id="editor-save-area" style="display:none;margin-top:20px;display:flex;gap:10px;align-items:center;">
+          <button onclick="saveToGitHub()" id="save-btn"
+            style="background:#e38c4d;color:white;border:none;padding:12px 28px;border-radius:10px;font-size:15px;font-family:inherit;cursor:pointer;font-weight:700;">
+            שמירה ופרסום
+          </button>
+          <button onclick="previewChanges()"
+            style="background:#f5ede0;color:#6b5a3e;border:none;padding:12px 20px;border-radius:10px;font-size:14px;font-family:inherit;cursor:pointer;">
+            תצוגה מקדימה
+          </button>
+          <span id="save-status" style="font-size:13px;color:#9b8b72;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Editor trigger button -->
+<button onclick="openEditor()" 
+  style="position:fixed;bottom:24px;left:24px;background:#e38c4d;color:white;border:none;width:48px;height:48px;border-radius:50%;font-size:20px;cursor:pointer;z-index:1000;box-shadow:0 4px 12px rgba(227,140,77,0.4);display:flex;align-items:center;justify-content:center;"
+  title="עורך תוכן">✏️</button>
+
+<script>
+const EDITOR_HASH = "a6effea99a7914036b9adb529cfdf10e0c6ffe4f2669f1da856d061d9bcef7d1";
+const GITHUB_TOKEN = atob("Z2hwX2N2V2NGUll6YTFieVBlY1dDVFBFcjh5QmNTVkk3dzM2eHViTA==");
+const GITHUB_REPO = "HealelbyShahar/Healel";
+const GITHUB_BRANCH = "main";
+let currentSection = null;
+let fileSha = null;
+
+function openEditor() { 
+  document.getElementById('editor-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEditor() {
+  document.getElementById('editor-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function editorLogin() {
+  const pw = document.getElementById('editor-pw').value;
+  const hash = await sha256(pw);
+  if (hash === EDITOR_HASH) {
+    document.getElementById('editor-login').style.display = 'none';
+    document.getElementById('editor-main').style.display = 'block';
+  } else {
+    document.getElementById('editor-login-err').style.display = 'block';
+  }
+}
+
+document.getElementById('editor-pw').addEventListener('keydown', e => {
+  if (e.key === 'Enter') editorLogin();
+});
+
+async function sha256(msg) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function loadSection() {
+  const sec = document.getElementById('editor-section').value;
+  if (!sec) return;
+  currentSection = sec;
+  
+  const el = document.getElementById(sec);
+  if (!el) { 
+    document.getElementById('save-status').textContent = 'קטע לא נמצא';
+    return; 
+  }
+  
+  document.getElementById('editor-toolbar').style.display = 'flex';
+  document.getElementById('editor-area').style.display = 'block';
+  document.getElementById('editor-html-area').style.display = 'block';
+  document.getElementById('editor-save-area').style.display = 'flex';
+  
+  const editorContent = document.getElementById('editor-content');
+  editorContent.innerHTML = el.innerHTML;
+  document.getElementById('editor-html').value = el.innerHTML;
+}
+
+function syncFromHtml() {
+  const html = document.getElementById('editor-html').value;
+  document.getElementById('editor-content').innerHTML = html;
+}
+
+document.getElementById('editor-content').addEventListener('input', function() {
+  document.getElementById('editor-html').value = this.innerHTML;
+});
+
+function insertBlock(type) {
+  const editor = document.getElementById('editor-content');
+  editor.focus();
+  let html = '';
+  if (type === 'p') html = '<p>טקסט חדש</p>';
+  if (type === 'tip') html = '<div class="tip-box"><span class="tip-label">טיפ טבעי</span>כתבי כאן את הטיפ</div>';
+  if (type === 'note') html = '<div class="personal-note">כתבי כאן הערה אישית</div>';
+  if (type === 'bullet') html = '<div class="bullet-point"><p>נקודה חדשה</p></div>';
+  
+  const sel = window.getSelection();
+  if (sel.rangeCount) {
+    const range = sel.getRangeAt(0);
+    range.collapse(false);
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    range.insertNode(div.firstChild);
+  } else {
+    editor.innerHTML += html;
+  }
+  document.getElementById('editor-html').value = editor.innerHTML;
+}
+
+function applyColor() {
+  const color = document.getElementById('color-picker').value;
+  if (!currentSection) return;
+  const sec = document.getElementById(currentSection);
+  // Find the chapter cover section above this content
+  const chapterSection = sec.closest('section');
+  if (chapterSection) {
+    const cover = chapterSection.previousElementSibling;
+    if (cover && cover.classList.contains('chapter-cover')) {
+      cover.style.background = color;
+    }
+  }
+  document.getElementById('save-status').textContent = 'הצבע שונה — לחצי שמירה ופרסום';
+}
+
+function previewChanges() {
+  const sec = document.getElementById(currentSection);
+  const editorContent = document.getElementById('editor-content');
+  sec.innerHTML = editorContent.innerHTML;
+  document.getElementById('save-status').textContent = 'תצוגה מקדימה פעילה';
+}
+
+async function saveToGitHub() {
+  const btn = document.getElementById('save-btn');
+  const status = document.getElementById('save-status');
+  
+  // Apply changes to page first
+  previewChanges();
+  
+  btn.textContent = 'שומר...';
+  btn.disabled = true;
+  status.textContent = '';
+  
+  try {
+    // Get current file from GitHub
+    const getRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/index.html`, {
+      headers: { 
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    if (!getRes.ok) throw new Error('שגיאה בקבלת הקובץ מ-GitHub');
+    
+    const fileData = await getRes.json();
+    const sha = fileData.sha;
+    
+    // Get current page HTML
+    const newContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML
+      .replace(/<div id="editor-overlay"[\s\S]*?<\/div>\s*\n<!-- Editor trigger/, '<!-- Editor trigger')
+      .replace(/document\.getElementById\(\'editor-overlay\'\)\.style\.display = \'block\'/g, '');
+    
+    // Actually just get the full page source and update the section
+    const currentHtml = document.documentElement.outerHTML;
+    
+    const encoded = btoa(unescape(encodeURIComponent(currentHtml)));
+    
+    const putRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/index.html`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'עדכון תוכן מממשק העריכה',
+        content: encoded,
+        sha: sha,
+        branch: GITHUB_BRANCH
+      })
+    });
+    
+    if (putRes.ok) {
+      status.textContent = 'נשמר! האתר יתעדכן תוך כ-2 דקות';
+      status.style.color = '#7dba60';
+      btn.textContent = 'שמירה ופרסום';
+      btn.disabled = false;
+    } else {
+      const err = await putRes.json();
+      throw new Error(err.message || 'שגיאה בשמירה');
+    }
+  } catch(e) {
+    status.textContent = 'שגיאה: ' + e.message;
+    status.style.color = 'red';
+    btn.textContent = 'שמירה ופרסום';
+    btn.disabled = false;
+  }
+}
+</script>
 
 </body>
 </html>
