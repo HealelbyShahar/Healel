@@ -1,3 +1,4 @@
+
 <!DOCTYPE html><html lang="he" dir="rtl"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1131,7 +1132,7 @@
   <p><a href="https://www.instagram.com/healel_aromatherapy_sobada/" target="_blank">@healel_aromatherapy_sobada</a></p>
   <p style="margin-top:4px;">נכתב באהבה, מאמא לאמא</p>
   <p style="margin-top:20px;">
-    <a href="#" onclick="event.preventDefault();openEditor();" style="font-size:11px;color:rgba(254,243,218,0.3);text-decoration:none;letter-spacing:0.05em;cursor:pointer;">כניסת מנהל</a>
+    <a href="#" onclick="event.preventDefault();window.openEditor();" style="font-size:11px;color:rgba(254,243,218,0.3);text-decoration:none;letter-spacing:0.05em;cursor:pointer;">כניסת מנהל</a>
   </p>
 </footer>
 
@@ -1169,6 +1170,18 @@
     link.addEventListener('click', function(e){ 
       closeToc();
     });
+  });
+
+  // Safety net: always restore scroll on any anchor navigation
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      setTimeout(function(){ document.body.style.overflow = ''; }, 50);
+    });
+  });
+
+  // Also restore on back/forward navigation
+  window.addEventListener('popstate', function(){
+    document.body.style.overflow = '';
   });
 </script>
 
