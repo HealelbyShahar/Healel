@@ -1301,7 +1301,7 @@
 
         <!-- Save area -->
         <div id="ed-save" style="display:none;margin-top:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button onclick="saveToGitHub()" id="save-btn" style="background:#e38c4d;color:white;border:none;padding:11px 24px;border-radius:10px;font-size:14px;font-family:inherit;cursor:pointer;font-weight:700;" fdprocessedid="kv64xj" disabled="">שומר...</button>
+          <button onclick="saveToGitHub()" id="save-btn" style="background:#e38c4d;color:white;border:none;padding:11px 24px;border-radius:10px;font-size:14px;font-family:inherit;cursor:pointer;font-weight:700;" >שמירה ופרסום</button>
           <button onclick="previewSection()" style="background:#f5ede0;color:#6b5a3e;border:none;padding:11px 18px;border-radius:10px;font-size:13px;font-family:inherit;cursor:pointer;" fdprocessedid="wfbo6p">
             תצוגה מקדימה
           </button>
@@ -1336,6 +1336,8 @@
     $('ed-area').style.display = 'none';
     $('ed-save').style.display = 'none';
     $('save-msg').textContent = '';
+    var saveBtn = $('save-btn');
+    if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = 'שמירה ופרסום'; }
     var hasToken = !!localStorage.getItem('_hed_tok');
     $('token-row').style.display = hasToken ? 'none' : 'block';
   };
