@@ -1432,10 +1432,7 @@
       var fileData = await getRes.json();
 
       // Encode current page HTML
-      var html = '<!DOCTYPE html>
-<html lang="he" dir="rtl">
-' + document.documentElement.innerHTML + '
-</html>';
+      var html = '<!DOCTYPE html><html lang="he" dir="rtl">' + document.documentElement.innerHTML + '</html>';
       var encoded = btoa(unescape(encodeURIComponent(html)));
 
       // Save
