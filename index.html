@@ -1,4 +1,3 @@
-
 <!DOCTYPE html><html lang="he" dir="rtl"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -575,7 +574,7 @@
   }
 </style>
 </head>
-<body>
+<body style="">
 
 <!-- NAVBAR -->
 <nav class="navbar">
@@ -645,7 +644,7 @@
       <p>המטרה בחוברת היא לתת לך דווקא את המידע שפחות מתייחסים אליו. זה שלא כתוב בספרים על הורות, שלא מלמדים בקורס הכנה ללידה ושהצוות הרפואי לא מכין אותך אליו - את התכל'ס של היום יום.</p>
       <p>חשוב לי לומר שאני לא אשת מקצוע לגיל הרך. לא מלווה התפתחותית, לא יועצת זוגית, לא דולה, מיילדת או יועצת הנקה. אני רק אמא, שחוותה קצת דברים בעצמה, ורוצה להעביר את הידע שלי הלאה ולעזור לעוד אימהות.</p>
       <p>מקווה שתמצאי בחוברת הזו ערך. אשמח לעזור בכל שאלה.</p>
-      <p>לידה קלה, טובה, נעימה ובידיים מלאות</p>
+      <p>לידה קלה, טובה, נעימה ובידיים מלאות</p><p></p><div class="tip-box"><span class="tip-label">טיפ טבעי</span>כתבי כאן את הטיפ</div><p></p>
       <div class="footnote">* החוברת כתובה בלשון "תינוקי", אך פונה לשני המינים. מה לעשות, עברית היא שפה מגדרית, ואני לא אוהבת את המילה "בייבי".</div>
     </div>
   </div>
@@ -1132,7 +1131,7 @@
   <p><a href="https://www.instagram.com/healel_aromatherapy_sobada/" target="_blank">@healel_aromatherapy_sobada</a></p>
   <p style="margin-top:4px;">נכתב באהבה, מאמא לאמא</p>
   <p style="margin-top:20px;">
-    <button onclick="window.openEditor();" style="background:none;border:none;font-size:11px;color:rgba(254,243,218,0.3);letter-spacing:0.05em;cursor:pointer;font-family:inherit;padding:0;">כניסת מנהל</button>
+    <button onclick="window.openEditor();" style="background:none;border:none;font-size:11px;color:rgba(254,243,218,0.3);letter-spacing:0.05em;cursor:pointer;font-family:inherit;padding:0;" fdprocessedid="r3cq1k">כניסת מנהל</button>
   </p>
 </footer>
 
@@ -1192,28 +1191,28 @@
 
 
 <!-- EDITOR -->
-<div id="editor-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55); z-index: 9999; overflow-y: auto;">
+<div id="editor-overlay" style="display: none; position: fixed; inset: 0px; background: rgba(0, 0, 0, 0.55); z-index: 9999; overflow-y: auto;">
   <div style="background:#fff;max-width:800px;margin:32px auto 60px;border-radius:16px;overflow:hidden;font-family:'IBM Plex Sans Hebrew',sans-serif;direction:rtl;">
 
     <!-- Login -->
-    <div id="editor-login" style="padding:40px;text-align:center;position:relative;">
-      <button onclick="closeEditor()" style="position:absolute;top:14px;left:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#9b8b72;line-height:1;padding:4px 8px;">✕</button>
+    <div id="editor-login" style="padding: 40px; text-align: center; position: relative; display: none;">
+      <button onclick="closeEditor()" style="position:absolute;top:14px;left:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#9b8b72;line-height:1;padding:4px 8px;" fdprocessedid="8r2ugf">✕</button>
       <div style="font-size:32px;margin-bottom:12px;">✏️</div>
       <h2 style="color:#e38c4d;margin-bottom:6px;font-size:20px;">עורך תוכן HEALEL</h2>
       <p style="color:#9b8b72;font-size:13px;margin-bottom:28px;">כניסה למנהלת בלבד</p>
-      <input id="editor-pw" type="password" placeholder="סיסמה" style="width:100%;max-width:260px;padding:11px 16px;border:1.5px solid #ede5d8;border-radius:10px;font-size:15px;font-family:inherit;direction:rtl;text-align:center;outline:none;display:block;margin:0 auto 12px;">
+      <input id="editor-pw" type="password" placeholder="סיסמה" style="width:100%;max-width:260px;padding:11px 16px;border:1.5px solid #ede5d8;border-radius:10px;font-size:15px;font-family:inherit;direction:rtl;text-align:center;outline:none;display:block;margin:0 auto 12px;" fdprocessedid="haf5q">
       <div id="token-row" style="display:none;margin-bottom:16px;">
         <p style="font-size:12px;color:#9b8b72;margin-bottom:6px;">GitHub Token (מוזן פעם אחת בלבד):</p>
         <input id="editor-token" type="password" placeholder="ghp_..." style="width:100%;max-width:320px;padding:10px 14px;border:1.5px solid #ede5d8;border-radius:10px;font-size:13px;font-family:inherit;direction:ltr;text-align:left;outline:none;display:block;margin:0 auto;">
       </div>
-      <button onclick="editorLogin()" style="background:#e38c4d;color:white;border:none;padding:11px 32px;border-radius:10px;font-size:15px;font-family:inherit;cursor:pointer;font-weight:700;">
+      <button onclick="editorLogin()" style="background:#e38c4d;color:white;border:none;padding:11px 32px;border-radius:10px;font-size:15px;font-family:inherit;cursor:pointer;font-weight:700;" fdprocessedid="mw91lg">
         כניסה
       </button>
       <p id="login-err" style="color: rgb(238, 0, 85); font-size: 13px; margin-top: 10px; display: none;">סיסמה שגויה</p>
     </div>
 
     <!-- Main editor -->
-    <div id="editor-main" style="display:none;">
+    <div id="editor-main" style="display: block;">
       <div style="background:#e38c4d;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;">
         <h2 style="color:#fef3da;font-size:17px;margin:0;">✏️ עורך תוכן</h2>
         <div style="display:flex;gap:8px;">
@@ -1238,7 +1237,7 @@
         </div>
 
         <!-- Toolbar -->
-        <div id="ed-toolbar" style="display:none;margin-bottom:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+        <div id="ed-toolbar" style="margin-bottom: 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
           <span style="font-size:11px;color:#9b8b72;">הוספה:</span>
           <button onclick="insertBlock('p')" style="background:#f5ede0;border:none;padding:5px 11px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:12px;color:#6b5a3e;" fdprocessedid="wz65ll">+ פסקה</button>
           <button onclick="insertBlock('tip')" style="background:#f0f7eb;border:none;padding:5px 11px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:12px;color:#2d5218;" fdprocessedid="9xnstu">+ טיפ טבעי</button>
@@ -1257,39 +1256,18 @@
         <!-- Editable area -->
         <div id="ed-area" style="display: block;">
           <div id="ed-content" contenteditable="true" style="min-height:280px;border:1.5px solid #ede5d8;border-radius:10px;padding:14px;font-size:14px;line-height:1.8;direction:rtl;outline:none;background:#faf7f3;overflow-y:auto;max-height:420px;">
-    <p>אם את אוהבת לחקור וללמוד כמוני, אלה מקורות מידע שאני ממליצה עליהם:</p>
-<div class="resource-group"><h3>חשבונות אינסטגרם</h3>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/iritangel/" target="_blank">עירית אנג'ל</a></span><span class="resource-desc">דולה - סיפורי לידה ותכנים על ביומכניקה בלידה</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/ziva_kachlon/" target="_blank">זיווה כחלון</a></span><span class="resource-desc">מיילדת - תכנים על לידה פיזיולוגית</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/rotemdon/" target="_blank">רותם דון</a></span><span class="resource-desc">דולה - תכנים על לידה ותינוקות</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/yulia.doula/" target="_blank">יולה צ'רנוב</a></span><span class="resource-desc">דולה - תכנים על תנועתיות בלידה</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/prof.eyalsheiner/" target="_blank">פרופ' אייל שיינר</a></span><span class="resource-desc">רופא</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/menikot_w_omer/" target="_blank">עומר מלי הנגבי</a></span><span class="resource-desc">יועצת הנקה</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.instagram.com/litalevinvoda/" target="_blank">ליטל לוין וודה</a></span><span class="resource-desc">דולה פוסט היריון - תוכן מנרמל (!!!)</span></div>
-</div>
-<div class="resource-group"><h3>פודקאסטים</h3>
-<div class="resource-item"><span class="resource-name"><a href="https://open.spotify.com/show/5UMP2LgDAo7n9ih5fvSYEz" target="_blank">חופשייה ללדת</a></span><span class="resource-desc">זיווה כחלון</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://open.spotify.com/show/0OQnglgNAHROK4QMU7sZxB" target="_blank">הריון בטוח</a></span><span class="resource-desc">פרופ' אייל שיינר</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://open.spotify.com/show/2D5FRZx9zCd1LkJtKC029H" target="_blank">מאמדע</a></span><span class="resource-desc">מור הרפז</span></div>
-</div>
-<div class="resource-group"><h3>אתרים</h3>
-<div class="resource-item"><span class="resource-name"><a href="https://www.caress.co.il" target="_blank">הורות מחבקת</a></span><span class="resource-desc">הורות בגישה היקשרותית</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://menikot.co.il" target="_blank">מניקות</a></span><span class="resource-desc">עומר מלי הנגבי</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.lllisrael.org.il/" target="_blank">ליגת לה לצ'ה</a></span><span class="resource-desc">תמיכה בהנקה&nbsp;</span></div>
-</div>
-<div class="resource-group"><h3>קבוצות פייסבוק</h3>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/325131508707396/" target="_blank">הורות מחבקת</a></span><span class="resource-desc">על הורות ושינה בגישה היקשרותית</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/legadel/" target="_blank">לגדל ולצמוח יחד</a></span><span class="resource-desc">קהילה לרפואה מונעת, גדילה והתפתחות מלידה עד גיל 6</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/1633672296932652" target="_blank">לידה טבעית - פשוט ללדת</a></span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/leidapeila/" target="_blank">לידה פעילה</a></span><span class="resource-desc">קבוצת ההמשך</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/154159761798926" target="_blank">שביל החלב</a></span><span class="resource-desc">קבוצת אמהות מניקות</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/menikot/" target="_blank">מניקות מתייעצות על הכל</a></span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/lllisrael2015/" target="_blank">ליגת לה לצ'ה ישראל</a></span><span class="resource-desc">קבוצת הפייסבוק הרשמית</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/114090695293065" target="_blank">חיבוק הבד</a></span><span class="resource-desc">קהילת מנשאים בישראל</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/585632601601770/" target="_blank">שוק מנשאים פלוס</a></span></div>
-</div>
-
-  </div>
+      <p>היי מאמא,</p>
+      <p>אני שחר - אישה, רעיה, אמא ומטפלת ברפואה משלימה (<a href="https://www.instagram.com/healel_aromatherapy_sobada/" target="_blank">הנה קישור לעמוד שלי</a>).</p>
+      <p>לפני שהפכתי לאמא, שאלתי חברה איך היא יודעת את כל מה שהיא יודעת על אימהות והורות - החל מאיזה ציוד צריך, ועד לאיך להניק, כמה לישון, איך מוציאים גזים וכו'. מאחר שמדובר בחברה שהיא אחות, היא כתבה לי "מדריך לאמא המתחילה", שיעזור לענות לי על השאלות.</p>
+      <p>אחרי שילדתי קיבלתי הרבה שאלות מחברות שצפויות ללדת, בדיוק על הדברים האלה, ומכאן נולד הרעיון לחוברת הזו - שמבוססת על כל הידע שצברתי.</p>
+      <p>אני אוהבת לחקור, ללמוד, לדעת ולהתכונן. זה נותן לי אשליה של שליטה. ואימהות זה דבר מפחיד גם ככה, אז כמה שיכולתי להתכונן - יותר טוב. קראתי הרבה, האזנתי לפודקאסטים, עקבתי אחרי נשות מקצוע מהתחום, צפיתי בסרטונים... ואספתי המון מידע.</p>
+      <p>החוברת מלווה אותך החל מהטרימסטר השלישי (או השני, למקדימניות) ועד הטרימסטר הרביעי והחיים עם ניובורן.</p>
+      <p>המטרה בחוברת היא לתת לך דווקא את המידע שפחות מתייחסים אליו. זה שלא כתוב בספרים על הורות, שלא מלמדים בקורס הכנה ללידה ושהצוות הרפואי לא מכין אותך אליו - את התכל'ס של היום יום.</p>
+      <p>חשוב לי לומר שאני לא אשת מקצוע לגיל הרך. לא מלווה התפתחותית, לא יועצת זוגית, לא דולה, מיילדת או יועצת הנקה. אני רק אמא, שחוותה קצת דברים בעצמה, ורוצה להעביר את הידע שלי הלאה ולעזור לעוד אימהות.</p>
+      <p>מקווה שתמצאי בחוברת הזו ערך. אשמח לעזור בכל שאלה.</p>
+      <p>לידה קלה, טובה, נעימה ובידיים מלאות</p><p><div class="tip-box"><span class="tip-label">טיפ טבעי</span>כתבי כאן את הטיפ</div></p>
+      <div class="footnote">* החוברת כתובה בלשון "תינוקי", אך פונה לשני המינים. מה לעשות, עברית היא שפה מגדרית, ואני לא אוהבת את המילה "בייבי".</div>
+    </div>
           <p style="font-size:11px;color:#b0a090;margin-top:5px;">לחצי על טקסט לעריכה. להסרת פסקה — מחקי את כל הטקסט שבה.</p>
 
           <!-- HTML toggle -->
@@ -1300,8 +1278,8 @@
         </div>
 
         <!-- Save area -->
-        <div id="ed-save" style="display:none;margin-top:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <button onclick="saveToGitHub()" id="save-btn" style="background:#e38c4d;color:white;border:none;padding:11px 24px;border-radius:10px;font-size:14px;font-family:inherit;cursor:pointer;font-weight:700;" >שמירה ופרסום</button>
+        <div id="ed-save" style="margin-top: 16px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button onclick="saveToGitHub()" id="save-btn" style="background:#e38c4d;color:white;border:none;padding:11px 24px;border-radius:10px;font-size:14px;font-family:inherit;cursor:pointer;font-weight:700;" fdprocessedid="d7j7cn" disabled="">שומר...</button>
           <button onclick="previewSection()" style="background:#f5ede0;color:#6b5a3e;border:none;padding:11px 18px;border-radius:10px;font-size:13px;font-family:inherit;cursor:pointer;" fdprocessedid="wfbo6p">
             תצוגה מקדימה
           </button>
@@ -1537,4 +1515,5 @@
 
 
 
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
 <span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
