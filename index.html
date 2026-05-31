@@ -1331,6 +1331,11 @@
     $('editor-main').style.display = 'none';
     $('login-err').style.display = 'none';
     $('editor-pw').value = '';
+    $('editor-section').value = '';
+    $('ed-toolbar').style.display = 'none';
+    $('ed-area').style.display = 'none';
+    $('ed-save').style.display = 'none';
+    $('save-msg').textContent = '';
     var hasToken = !!localStorage.getItem('_hed_tok');
     $('token-row').style.display = hasToken ? 'none' : 'block';
   };
@@ -1464,6 +1469,15 @@
     msg.style.color = '#9b8b72';
 
     try {
+      // Clean UI state before saving
+      var overlay = $('editor-overlay');
+      var body = document.body;
+      var origOverlay = overlay.style.display;
+      var origOverflow = body.style.overflow;
+      overlay.style.display = 'none';
+      body.style.overflow = '';
+      body.style.removeProperty('overflow');
+
       // Get current file SHA
       var getRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/index.html', {
         headers: {
@@ -1494,14 +1508,22 @@
         })
       });
 
+      // Restore UI - overlay hidden, overflow reset
+      overlay.style.display = 'none';
+      body.style.overflow = '';
+
       if (putRes.ok) {
         msg.textContent = '✓ נשמר! האתר יתעדכן תוך כ-2 דקות';
         msg.style.color = '#7dba60';
+        // Reopen editor so user sees confirmation
+        overlay.style.display = 'block';
       } else {
         var err = await putRes.json();
         throw new Error(err.message || 'שגיאה בשמירה');
       }
     } catch(e) {
+      overlay.style.display = 'block';
+      body.style.overflow = 'hidden';
       msg.textContent = 'שגיאה: ' + e.message;
       msg.style.color = '#e05';
     }
