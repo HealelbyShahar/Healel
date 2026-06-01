@@ -476,28 +476,23 @@
   }
     .resource-item {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.4rem;
-    padding: 0.55rem 0;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 0;
     border-bottom: 1px solid var(--border);
   }
   .resource-item:last-child { border-bottom: none; }
   .resource-name {
     font-size: 15px;
     font-weight: 400;
-    flex-shrink: 0;
-    max-width: 100%;
   }
-  .resource-name a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
-  .resource-name a:hover { color: var(--orange); border-color: var(--orange); }
+  .resource-name a { color: var(--orange); text-decoration: underline; }
+  .resource-name a:hover { opacity: 0.8; }
   .resource-desc {
-    font-size: clamp(14px, 2.3vw, 15px);
-    color: var(--text);
+    font-size: 13px;
+    color: var(--text-light);
     font-weight: 300;
-    flex: 1;
-    min-width: 0;
-    word-wrap: break-word;
+    line-height: 1.5;
   }
 
   /* ===== BIRTH PLAN ===== */
@@ -994,7 +989,7 @@
 </div>
 <div class="resource-group"><h3>אתרים</h3>
 <div class="resource-item"><span class="resource-name"><a href="https://www.caress.co.il" target="_blank">הורות מחבקת</a></span><span class="resource-desc">הורות בגישה היקשרותית</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://menikot.co.il" target="_blank">מניקות</a>,&nbsp;<a href="https://www.lllisrael.org.il/" target="_blank" style="color: rgb(227, 140, 77);">ליגת לה לצ'ה</a></span><span class="resource-desc" style="color: rgb(46, 42, 36);">תמיכה בהנקה&nbsp;</span></div>
+<div class="resource-item"><span class="resource-name"><a href="https://menikot.co.il" target="_blank">מניקות</a>,&nbsp;<a href="https://www.lllisrael.org.il/" target="_blank">ליגת לה לצ'ה</a></span><span class="resource-desc">תמיכה בהנקה</span></div>
 </div>
 <div class="resource-group"><h3>קבוצות פייסבוק</h3>
 <div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/325131508707396/" target="_blank">הורות מחבקת - על הורות ושינה בגישה הקשרותית</a></span></div>
@@ -1293,7 +1288,7 @@
 </div>
 <div class="resource-group"><h3>אתרים</h3>
 <div class="resource-item"><span class="resource-name"><a href="https://www.caress.co.il" target="_blank">הורות מחבקת</a></span><span class="resource-desc">הורות בגישה היקשרותית</span></div>
-<div class="resource-item"><span class="resource-name"><a href="https://menikot.co.il" target="_blank">מניקות</a>,&nbsp;<a href="https://www.lllisrael.org.il/" target="_blank" style="color: rgb(227, 140, 77);">ליגת לה לצ'ה</a></span><span class="resource-desc" style="color: rgb(46, 42, 36);">תמיכה בהנקה&nbsp;</span></div>
+<div class="resource-item"><span class="resource-name"><a href="https://menikot.co.il" target="_blank">מניקות</a>,&nbsp;<a href="https://www.lllisrael.org.il/" target="_blank">ליגת לה לצ'ה</a></span><span class="resource-desc">תמיכה בהנקה</span></div>
 </div>
 <div class="resource-group"><h3>קבוצות פייסבוק</h3>
 <div class="resource-item"><span class="resource-name"><a href="https://www.facebook.com/groups/325131508707396/" target="_blank">הורות מחבקת - על הורות ושינה בגישה הקשרותית</a></span></div>
